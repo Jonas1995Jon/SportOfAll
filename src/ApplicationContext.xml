@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/jdbc
+        http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+
+		
+		<context:annotation-config></context:annotation-config>
+		
+		<!-- 启用组件扫描，排除@Controller组件，该组件由SpringMVC配置文件扫描 -->
+		<context:component-scan base-package="com.sport">
+			<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+		</context:component-scan>
+		
+		<!-- 加载属性资源文件 -->
+        <context:property-placeholder location="classpath:jdbc.properties"/>
+        <!-- 数据源 -->
+        <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+          <property name="driverClassName" value="${driver}"></property>
+          <property name="url" value="${url}"></property>
+          <property name="username" value="${jdbc.username}"></property>
+          <property name="password" value="${password}"></property>
+        </bean>
+       
+        <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+           <!-- 引用数据源 -->
+          <property name="dataSource" ref="dataSource"></property>
+        
+          <!-- 指定hibernate 的相关设置 -->
+        
+          <property name="hibernateProperties">
+             <props>
+               <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
+               <prop key="hibernate.show_sql">true</prop>
+               <prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext</prop>
+               <prop key="hibernate.hbm2ddl.auto">update</prop>
+               <prop key="hibernate.format_sql">true</prop>
+             </props>
+          </property>
+        
+          <!-- 映射文件的引入 -->
+           <!-- xml式 -->
+          <!-- <property name="mappingLocations">
+             <list>
+               <value></value>
+             </list>
+          </property> -->
+          
+          <!-- 注解方式  某java 包下的实体映射类 -->
+        <property name="packagesToScan" value="com.sport.entity"></property>
+          
+        </bean>  
+           
+          <!-- spring 事务管理 -->
+          <!-- 定义事务管理器 -->
+          <bean id="tx" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+            <!-- 引入sessionFactory  -->
+             <property name="sessionFactory" ref="sessionFactory"> </property>
+          </bean>
+       <tx:annotation-driven transaction-manager="tx" proxy-target-class="false" />
+
+</beans>

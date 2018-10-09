@@ -1,0 +1,56 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="SportOfAll:Web exploded">
+    <output-path>$PROJECT_DIR$/classes/artifacts/SportOfAll_Web_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="SportOfAll/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="SportOfAll" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="module" name="antlr-2.7.7.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="aopalliance-1.0.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="aspectjweaver-1.5.0.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="commons-beanutils-1.8.0.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="commons-codec-1.9.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="commons-collections-3.2.2.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="commons-dbcp-1.4.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="commons-fileupload-1.2.1.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="commons-io-2.2.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="commons-lang-2.4.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="commons-logging-1.1.3.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="commons-pool-1.6.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="dom4j-1.6.1.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="ezmorph-1.0.6.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="freemarker-2.3.22.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="hibernate-commons-annotations-4.0.5.Final.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="hibernate-core-4.3.11.Final.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="hibernate-jpa-2.1-api-1.0.0.Final.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="jackson-annotations-2.8.0.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="jackson-core-2.8.0.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="javassist-3.11.0.GA.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="jboss-logging-3.1.3.GA.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="json-lib-2.1.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="json.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="jta-1.1.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="mysql-connector-java-5.1.20-bin.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="ognl-3.0.19.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="spring-aop-4.3.0.RELEASE.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="spring-beans-4.3.0.RELEASE.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="spring-context-4.3.0.RELEASE.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="spring-core-4.3.0.RELEASE.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="spring-expression-4.3.0.RELEASE.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="spring-jdbc-4.3.0.RELEASE.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="spring-orm-4.3.0.RELEASE.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="spring-tx-4.3.0.RELEASE.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="spring-web-4.3.0.RELEASE.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="spring-webmvc-4.3.0.RELEASE.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="jackson-databind-2.3.0.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="jstl-1.2.jar" module-name="SportOfAll" />
+          <element id="library" level="module" name="gson-2.3.1.jar" module-name="SportOfAll" />
+          <element id="library" level="project" name="lib" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

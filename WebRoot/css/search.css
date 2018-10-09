@@ -1,0 +1,116 @@
+.sewv {
+	position: relative;
+	width: 80px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.sewvtop {
+	width: 100%;
+	height: 45px;
+	border: 2px solid #009470;
+	border-right: 0;
+	cursor: pointer;
+	border-radius: 2px;
+	overflow: hidden;
+}
+
+.sewvtop>span {
+	float: left;
+	width: 70%;
+	height: 45px;
+	white-space: pre;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	font-size: 14px;
+	line-height: 45px;
+	color: #666;
+	padding: 0 5px;
+	text-align: center;
+}
+
+.sewvtop>em {
+	float: right;
+	width: 20px;
+	height: 20px;
+	vertical-align: middle;
+}
+
+.sewvtop>em>img {
+	margin-top: 12px;
+}
+
+.sewvbm {
+	width: 102%;
+	position: absolute;
+	left: 0;
+	top: 43px;
+	display: none;
+	border: 2px solid #009470;
+	border-radius: 2px;
+	background-color: skyblue;
+}
+
+.sewvbm>li {
+	cursor: pointer;
+	width: 100%;
+	height: 20px;
+	text-align: center;
+	line-height: 20px;
+	font-size: 14px;
+	color: #666;
+	padding-left: 5px;
+}
+
+.sewvbm>li:hover {
+	background: #009470;
+	color: #fff;
+}
+
+.lbaxztop {
+	animation: rotatete 0.3s linear forwards;
+}
+
+.lbaxztop2 {
+	animation: rotatete2 0.3s linear forwards;
+}
+
+@
+keyframes rotatete {
+	from {transform: rotate(0deg);
+}
+
+to {
+	transform: rotate(180deg);
+}
+
+}
+@
+keyframes rotatete {
+	from {transform: rotate(0deg);
+}
+
+to {
+	transform: rotate(180deg);
+}
+
+}
+@
+-moz-keyframes rotatete2 {
+	from {transform: rotate(180deg);
+}
+
+to {
+	transform: rotate(0deg);
+}
+
+}
+@
+keyframes rotatete2 {
+	from {transform: rotate(180deg);
+}
+
+to {
+	transform: rotate(0deg);
+}
+}

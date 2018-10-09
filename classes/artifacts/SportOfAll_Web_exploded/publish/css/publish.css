@@ -1,0 +1,117 @@
+body {
+
+    font-family:Arial, Sans-Serif;
+
+    font-size:0.85em;
+
+    text-align: center;
+
+}
+
+center {
+	margin-bottom: 20px;
+}
+
+.myform ul,
+.myform ul li {
+
+    list-style-type: none;
+
+    margin: 0;
+
+    padding: 0;
+
+}
+
+.myform ul li.first {
+
+    border-top: 1px solid #DFDFDF;
+
+}
+
+.myform ul p {
+
+    float: left;
+
+    margin: 5px 0;
+
+}
+
+.myform ul h3 {
+
+    float: left;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    margin: 5px 0 0 0;
+
+    width: 200px;
+
+    margin-left:20px;
+
+}
+
+.myform ul li {
+
+    border-bottom: 1px solid #DFDFDF;
+
+    padding: 15px 0;
+
+    width:600px;
+
+    overflow:hidden;
+
+}
+
+.myform ul input[type="text"],
+.myform ul input[type="password"],
+.myform ul input[type="submit"],
+.myform ul textarea,
+.myform ul section {
+
+    width:300px;
+
+    padding:5px;
+
+    position:relative;
+
+    border:solid 1px #666;
+
+    -moz-border-radius:5px;
+
+    -webkit-border-radius:5px;
+}
+
+.myform ul section {
+    margin-left: 220px;
+}
+
+.myform ul li p.submitp {
+    width: 100%
+}
+
+.myform ul li p.submitp input {
+    font-size: 20px;
+    width: 100%;
+    padding: 10px;
+}
+
+select {
+	width: 300px;
+    padding: 5px;
+    position: relative;
+    border: solid 1px #666;
+}
+
+
+.time {
+    padding-left: 10px;
+    height: 38px;
+    min-width: 262px;
+    line-height: 38px;
+    border: 1px solid #e6e6e6;
+    background-color: #fff;
+    border-radius: 2px;
+}
