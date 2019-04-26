@@ -10,7 +10,17 @@ import javax.persistence.Id;
 public class ZhiDaoYuan {
 	
 	private int zid;
-	
+
+	private int clubid;
+
+	public int getClubid() {
+		return clubid;
+	}
+
+	public void setClubid(int clubid) {
+		this.clubid = clubid;
+	}
+
 	private String name;
 	
 	private int sex;
@@ -37,9 +47,9 @@ public class ZhiDaoYuan {
 		
 	}
 
-	public ZhiDaoYuan(String name, int sex, int age, String images,
-			String address, String menuName, String levelStr,
-			int levelNum, String description, String source, Date publishDate) {
+	public ZhiDaoYuan(int zid, int clubid, String name, int sex, int age, String images, String address, String menuName, int levelNum, String levelStr, String description, String source, Date publishDate) {
+		this.zid = zid;
+		this.clubid = clubid;
 		this.name = name;
 		this.sex = sex;
 		this.age = age;
@@ -153,11 +163,20 @@ public class ZhiDaoYuan {
 
 	@Override
 	public String toString() {
-		return "ZhiDaoYuan [zid=" + zid + ", name=" + name + ", sex=" + sex
-				+ ", age=" + age + ", images=" + images + ", address="
-				+ address + ", menuName=" + menuName + ", level=" + levelStr
-				+ ", levelNum=" + levelNum + ", description=" + description +
-				", source=" + source + ", publishDate=" + publishDate + "]";
+		return "ZhiDaoYuan{" +
+				"zid=" + zid +
+				", clubid=" + clubid +
+				", name='" + name + '\'' +
+				", sex=" + sex +
+				", age=" + age +
+				", images='" + images + '\'' +
+				", address='" + address + '\'' +
+				", menuName='" + menuName + '\'' +
+				", levelNum=" + levelNum +
+				", levelStr='" + levelStr + '\'' +
+				", description='" + description + '\'' +
+				", source='" + source + '\'' +
+				", publishDate=" + publishDate +
+				'}';
 	}
-
 }

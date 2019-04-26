@@ -101,6 +101,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</a></li>
 						<li><a href="settings"><em><i></i>账号设置</em>
 						</a></li>
+						<c:if test="${sessionScope.radio == 0}">
+							<li><a href="myActivity"><em><i></i>我的赛事</em>
+							</a></li>
+							<li><a href="mySite"><em><i></i>我的场馆</em>
+							</a></li>
+						</c:if>
+						<c:if test="${sessionScope.radio == 1}">
+							<li><a href="activityShenHe"><em><i></i>赛事审核</em>
+							</a></li>
+							<li><a href="siteShenHe"><em><i></i>场馆审核</em>
+							</a></li>
+						</c:if>
 					</ul>
 				</div>
 			</div>

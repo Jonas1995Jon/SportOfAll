@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sport.service.UserInfoService;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -35,6 +36,10 @@ import com.sport.utils.SessionExpire;
 @Controller
 @RequestMapping("sheshi")
 public class SheShiController {
+
+	@Autowired
+	@Qualifier("userInfoService")
+	private UserInfoService userInfoService;
 	
 	@Autowired
 	@Qualifier("siteService")
@@ -188,7 +193,7 @@ public class SheShiController {
 	 * 预定场馆
 	 * @param request
 	 * @param response
-	 * @param aid
+	 * @param sid
 	 */
 	@RequestMapping("signUp")
 	public void signUp(HttpServletRequest request, HttpServletResponse response,
@@ -207,35 +212,50 @@ public class SheShiController {
 			if(session.getAttribute("uid") != null){
 				uid = (Integer) session.getAttribute("uid");
 			}
-			
-			if(status == 0){
-				
-				UserSite userSite = new UserSite();
-				
-				userSite.setUid(uid);
-				userSite.setSid(sid);
-				userSite.setStatus(1);
-				
-				userSiteService.save(userSite);
-				
-				userSitejson.put("message", "预定成功!");
-				
-			}else if (status == 1) {
-				
-				String hql = "from UserSite where sid = ?";
-				
-				List<UserSite> userSiteList = userSiteService.findByHql(hql, sid);
-				
-				for (int i = 0; i < userSiteList.size(); i++) {
-					
-					userSiteService.delete((Serializable) userSiteList.get(i).getUsid());
-					
-				}
-				
-				userSitejson.put("message", "取消成功!");
-				
+
+			String userHql = "from UserInfo where uid = ?";
+
+			List<UserInfo> userInfo = userInfoService.findByHql(userHql, uid);
+
+			UserInfo info = new UserInfo();
+
+			for (UserInfo user : userInfo) {
+				info = user;
+				break;
 			}
-			
+
+			if (info.getRadio() == 0) {
+				if(status == 0){
+
+					UserSite userSite = new UserSite();
+
+					userSite.setUid(uid);
+					userSite.setSid(sid);
+					userSite.setStatus(1);
+
+					userSiteService.save(userSite);
+
+					userSitejson.put("message", "预定成功!");
+
+				}else if (status == 1) {
+
+					String hql = "from UserSite where sid = ?";
+
+					List<UserSite> userSiteList = userSiteService.findByHql(hql, sid);
+
+					for (int i = 0; i < userSiteList.size(); i++) {
+
+						userSiteService.delete((Serializable) userSiteList.get(i).getUsid());
+
+					}
+
+					userSitejson.put("message", "取消成功!");
+
+				}
+			} else if (info.getRadio() == 1) {
+				userSitejson.put("message", "管理员不能操作");
+			}
+
 			userSitejson.put("code", "0");
 			
 		}else {

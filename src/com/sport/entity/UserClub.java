@@ -14,16 +14,28 @@ public class UserClub {
 	private int uid;
 	
 	private int clubid;
-	
+
+	private int zid;
+
+	public int getZid() {
+		return zid;
+	}
+
+	public void setZid(int zid) {
+		this.zid = zid;
+	}
+
 	private int status;
 
 	public UserClub() {
 		
 	}
 
-	public UserClub(int uid, int clubid, int status) {
+	public UserClub(int ucid, int uid, int clubid, int zid, int status) {
+		this.ucid = ucid;
 		this.uid = uid;
 		this.clubid = clubid;
+		this.zid = zid;
 		this.status = status;
 	}
 
@@ -63,8 +75,12 @@ public class UserClub {
 
 	@Override
 	public String toString() {
-		return "UserClub [ucid=" + ucid + ", uid=" + uid + ", clubid=" + clubid
-				+ ", status=" + status + "]";
+		return "UserClub{" +
+				"ucid=" + ucid +
+				", uid=" + uid +
+				", clubid=" + clubid +
+				", zid=" + zid +
+				", status=" + status +
+				'}';
 	}
-
 }

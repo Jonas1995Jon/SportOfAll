@@ -271,35 +271,50 @@ public class ActivityController {
 			if(session.getAttribute("uid") != null){
 				uid = (Integer) session.getAttribute("uid");
 			}
-			
-			if(status == 0){
-				
-				UserActivity userActivity = new UserActivity();
-				
-				userActivity.setUid(uid);
-				userActivity.setAid(aid);
-				userActivity.setStatus(1);
-				
-				userActivityService.save(userActivity);
-				
-				userActivityjson.put("message", "报名成功!");
-				
-			}else if (status == 1) {
-				
-				String hql = "from UserActivity where aid = ?";
-				
-				List<UserActivity> userActivityList = userActivityService.findByHql(hql, aid);
-				
-				for (int i = 0; i < userActivityList.size(); i++) {
-					
-					userActivityService.delete((Serializable) userActivityList.get(i).getUaid());
-					
-				}
-				
-				userActivityjson.put("message", "取消成功!");
-				
+
+			String userHql = "from UserInfo where uid = ?";
+
+			List<UserInfo> userInfo = userInfoService.findByHql(userHql, uid);
+
+			UserInfo info = new UserInfo();
+
+			for (UserInfo user : userInfo) {
+				info = user;
+				break;
 			}
-			
+
+			if (info.getRadio() == 0) {
+				if(status == 0){
+
+					UserActivity userActivity = new UserActivity();
+
+					userActivity.setUid(uid);
+					userActivity.setAid(aid);
+					userActivity.setStatus(1);
+
+					userActivityService.save(userActivity);
+
+					userActivityjson.put("message", "报名成功!");
+
+				}else if (status == 1) {
+
+					String hql = "from UserActivity where aid = ?";
+
+					List<UserActivity> userActivityList = userActivityService.findByHql(hql, aid);
+
+					for (int i = 0; i < userActivityList.size(); i++) {
+
+						userActivityService.delete((Serializable) userActivityList.get(i).getUaid());
+
+					}
+
+					userActivityjson.put("message", "取消成功!");
+
+				}
+			} else if (info.getRadio() == 1) {
+				userActivityjson.put("message", "管理员不能操作");
+			}
+
 			userActivityjson.put("code", "0");
 			
 		}else {

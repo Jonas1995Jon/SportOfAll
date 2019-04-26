@@ -13,6 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.sport.entity.*;
+import com.sport.service.*;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
@@ -25,18 +28,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.aliyuncs.exceptions.ClientException;
-import com.sport.entity.Activity;
-import com.sport.entity.Club;
-import com.sport.entity.CommonSense;
-import com.sport.entity.Site;
-import com.sport.entity.UserInfo;
-import com.sport.entity.ZhiDaoYuan;
-import com.sport.service.ActivityService;
-import com.sport.service.ClubService;
-import com.sport.service.CommonSenseService;
-import com.sport.service.SiteService;
-import com.sport.service.UserInfoService;
-import com.sport.service.ZhiDaoYuanService;
 import com.sport.utils.AliSms;
 import com.sport.utils.MD5Util;
 import com.sport.utils.ReturnJson;
@@ -68,6 +59,14 @@ public class UserInfoController {
 	@Autowired
 	@Qualifier("clubService")
 	private ClubService clubService;
+
+	@Autowired
+	@Qualifier("userActivityService")
+	private UserActivityService userActivityService;
+
+	@Autowired
+	@Qualifier("userSiteService")
+	private UserSiteService userSiteService;
 	
 	int random;
 	
@@ -515,6 +514,232 @@ public class UserInfoController {
 		
 		return mv;
 		
+	}
+
+	@RequestMapping("myActivity")
+	public ModelAndView myActivity(HttpServletRequest request){
+
+		ModelAndView mv = new ModelAndView();
+
+		HttpSession session = request.getSession();
+
+		Boolean flag = SessionExpire.isSessionExpire(request);
+
+		if(flag){
+
+			int uid = (Integer) session.getAttribute("uid");
+
+			String userActivityHql = "from UserActivity where uid = ?";
+
+			JSONObject jsonObj = new JSONObject();
+			JSONArray jsonArr = new JSONArray();
+
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+			List<UserActivity> userActivityList = userActivityService.findByHql(userActivityHql, uid);
+
+			for (UserActivity ua : userActivityList) {
+				Activity activity = activityService.findById((Serializable) ua.getAid());
+				jsonObj.put("aid", activity.getAid());
+				jsonObj.put("title", activity.getTitle());
+				jsonObj.put("menuName", activity.getMenuName());
+				jsonObj.put("position", activity.getPosition());
+				jsonObj.put("beginTime", sdf.format(activity.getBeginTime()));
+				jsonObj.put("endTime", sdf.format(activity.getEndTime()));
+				jsonObj.put("price", activity.getPrice());
+				jsonObj.put("state", ua.getState());
+				jsonArr.add(jsonObj);
+			}
+
+			mv.addObject("activityList", jsonArr);
+
+			mv.setViewName("personal/myActivity");
+
+		}else {
+
+			mv.setViewName("index");
+
+		}
+
+		return mv;
+
+	}
+
+	@RequestMapping("mySite")
+	public ModelAndView mySite(HttpServletRequest request){
+
+		ModelAndView mv = new ModelAndView();
+
+		HttpSession session = request.getSession();
+
+		Boolean flag = SessionExpire.isSessionExpire(request);
+
+		if(flag){
+
+			int uid = (Integer) session.getAttribute("uid");
+
+			String userActivityHql = "from UserSite where uid = ?";
+
+			JSONObject jsonObj = new JSONObject();
+			JSONArray jsonArr = new JSONArray();
+
+			List<UserSite> userActivityList = userSiteService.findByHql(userActivityHql, uid);
+
+			for (UserSite us : userActivityList) {
+				Site site = siteService.findById((Serializable) us.getSid());
+				jsonObj.put("sid", site.getSid());
+				jsonObj.put("name", site.getName());
+				jsonObj.put("phone", site.getPhone());
+				jsonObj.put("address", site.getAddress());
+				jsonObj.put("price", site.getPrice());
+				jsonObj.put("state", us.getState());
+				jsonArr.add(jsonObj);
+			}
+
+			mv.addObject("siteList", jsonArr);
+
+			mv.setViewName("personal/mySite");
+
+		}else {
+
+			mv.setViewName("index");
+
+		}
+
+		return mv;
+
+	}
+
+	@RequestMapping("activityShenHe")
+	public ModelAndView activityShenHe(HttpServletRequest request){
+
+		ModelAndView mv = new ModelAndView();
+
+		HttpSession session = request.getSession();
+
+		Boolean flag = SessionExpire.isSessionExpire(request);
+
+		if(flag){
+
+			int uid = (Integer) session.getAttribute("uid");
+
+			String userActivityHql = "from UserActivity where state = 0";
+
+			JSONObject jsonObj = new JSONObject();
+			JSONArray jsonArr = new JSONArray();
+
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+			List<UserActivity> userActivityList = userActivityService.findByHql(userActivityHql);
+
+			for (UserActivity ua : userActivityList) {
+				Activity activity = activityService.findById((Serializable) ua.getAid());
+				if (uid == activity.getUid()) {
+					jsonObj.put("aid", activity.getAid());
+					jsonObj.put("title", activity.getTitle());
+					jsonObj.put("menuName", activity.getMenuName());
+					jsonObj.put("position", activity.getPosition());
+					jsonObj.put("beginTime", sdf.format(activity.getBeginTime()));
+					jsonObj.put("endTime", sdf.format(activity.getEndTime()));
+					jsonObj.put("price", activity.getPrice());
+					jsonObj.put("uaid", ua.getUaid());
+					jsonObj.put("state", ua.getState());
+					jsonArr.add(jsonObj);
+				}
+			}
+
+			mv.addObject("activityList", jsonArr);
+
+			mv.setViewName("personal/activityShenHe");
+
+		}else {
+
+			mv.setViewName("index");
+
+		}
+
+		return mv;
+
+	}
+
+	@RequestMapping("activityYesOrNo")
+	public void activityYesOrNo(HttpServletRequest request, int uaid, int state){
+
+		UserActivity userActivity = userActivityService.findById((Serializable) uaid);
+
+		if (state == 1) {
+			userActivity.setState(1);
+		} else if (state == 2) {
+			userActivity.setState(2);
+		}
+
+		userActivityService.update(userActivity);
+
+		new UserInfoController().activityShenHe(request);
+	}
+
+	@RequestMapping("siteShenHe")
+	public ModelAndView siteShenHe(HttpServletRequest request){
+
+		ModelAndView mv = new ModelAndView();
+
+		HttpSession session = request.getSession();
+
+		Boolean flag = SessionExpire.isSessionExpire(request);
+
+		if(flag){
+
+			int uid = (Integer) session.getAttribute("uid");
+
+			String userSiteHql = "from UserSite where state = 0";
+
+			JSONObject jsonObj = new JSONObject();
+			JSONArray jsonArr = new JSONArray();
+
+			List<UserSite> siteList = userSiteService.findByHql(userSiteHql);
+
+			for (UserSite us : siteList) {
+				Site site = siteService.findById((Serializable) us.getSid());
+				if (uid == site.getUid()) {
+					jsonObj.put("sid", site.getSid());
+					jsonObj.put("name", site.getName());
+					jsonObj.put("phone", site.getPhone());
+					jsonObj.put("address", site.getAddress());
+					jsonObj.put("price", site.getPrice());
+					jsonObj.put("usid", us.getUsid());
+					jsonObj.put("state", us.getState());
+					jsonArr.add(jsonObj);
+				}
+			}
+
+			mv.addObject("siteList", jsonArr);
+
+			mv.setViewName("personal/siteShenHe");
+
+		}else {
+
+			mv.setViewName("index");
+
+		}
+
+		return mv;
+
+	}
+
+	@RequestMapping("siteYesOrNo")
+	public void siteYesOrNo(HttpServletRequest request, int usid, int state){
+
+		UserSite userSite = userSiteService.findById((Serializable) usid);
+
+		if (state == 1) {
+			userSite.setState(1);
+		} else if (state == 2) {
+			userSite.setState(2);
+		}
+
+		userSiteService.update(userSite);
+
+		new UserInfoController().siteShenHe(request);
 	}
 	
 	@RequestMapping("modifypwdByResource")

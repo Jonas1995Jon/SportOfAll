@@ -8,7 +8,17 @@ import javax.persistence.Id;
 public class Site {
 	
 	private int sid; //场馆ID
-	
+
+	private int uid; // 发布人
+
+	public int getUid() {
+		return uid;
+	}
+
+	public void setUid(int uid) {
+		this.uid = uid;
+	}
+
 	private String name; //场馆名称
 	
 	private String region;  //场馆区域
@@ -41,10 +51,9 @@ public class Site {
 		
 	}
 
-	public Site(String name, String region, String address, String phone,
-			float price, String image, String amOpenTime, String pmOpenTime,
-			String service, String sheshi, String summary, String traffic,
-			String menuName, int status) {
+	public Site(int sid, int uid, String name, String region, String address, String phone, float price, String image, String amOpenTime, String pmOpenTime, String service, String sheshi, String summary, String traffic, String menuName, int status) {
+		this.sid = sid;
+		this.uid = uid;
 		this.name = name;
 		this.region = region;
 		this.address = address;
@@ -185,13 +194,23 @@ public class Site {
 
 	@Override
 	public String toString() {
-		return "Site [sid=" + sid + ", name=" + name + ", region=" + region
-				+ ", address=" + address + ", phone=" + phone + ", price="
-				+ price + ", image=" + image + ", amOpenTime=" + amOpenTime
-				+ ", pmOpenTime=" + pmOpenTime + ", service=" + service
-				+ ", sheshi=" + sheshi + ", summary=" + summary + ", traffic="
-				+ traffic + ", menuName=" + menuName + ", status=" + status
-				+ "]";
+		return "Site{" +
+				"sid=" + sid +
+				", uid=" + uid +
+				", name='" + name + '\'' +
+				", region='" + region + '\'' +
+				", address='" + address + '\'' +
+				", phone='" + phone + '\'' +
+				", price=" + price +
+				", image='" + image + '\'' +
+				", amOpenTime='" + amOpenTime + '\'' +
+				", pmOpenTime='" + pmOpenTime + '\'' +
+				", service='" + service + '\'' +
+				", sheshi='" + sheshi + '\'' +
+				", summary='" + summary + '\'' +
+				", traffic='" + traffic + '\'' +
+				", menuName='" + menuName + '\'' +
+				", status=" + status +
+				'}';
 	}
-
 }

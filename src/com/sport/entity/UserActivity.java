@@ -17,15 +17,26 @@ public class UserActivity {
 	
 	private int status;
 
+	private int state;
+
+	public int getState() {
+		return state;
+	}
+
+	public void setState(int state) {
+		this.state = state;
+	}
+
 	public UserActivity() {
 		
 	}
 
-	public UserActivity(int uid, int aid, int status) {
-		super();
+	public UserActivity(int uaid, int uid, int aid, int status, int state) {
+		this.uaid = uaid;
 		this.uid = uid;
 		this.aid = aid;
 		this.status = status;
+		this.state = state;
 	}
 
 	@Id
@@ -64,8 +75,12 @@ public class UserActivity {
 
 	@Override
 	public String toString() {
-		return "UserActivity [uaid=" + uaid + ", uid=" + uid + ", aid=" + aid
-				+ ", status=" + status + "]";
+		return "UserActivity{" +
+				"uaid=" + uaid +
+				", uid=" + uid +
+				", aid=" + aid +
+				", status=" + status +
+				", state=" + state +
+				'}';
 	}
-
 }

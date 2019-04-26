@@ -28,8 +28,10 @@ public class SaiShiController {
 		ModelAndView mv = new ModelAndView();
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+		String currentTime = sdf.format(new java.util.Date());
 		
-		String hql = "from Activity order by beginTime desc";
+		String hql = "from Activity where endTime > " + currentTime + " order by beginTime desc";
 		
 		List<Activity> activities = activityService.queryPage(hql, 2, 1);
 		

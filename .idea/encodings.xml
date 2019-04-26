@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/0273c2dc-02db-4f16-8490-3b9dacc927b2/console.sql" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>
