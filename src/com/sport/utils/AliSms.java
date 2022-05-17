@@ -22,10 +22,10 @@ public class AliSms {
     public static final String domain = "dysmsapi.aliyuncs.com";
 
     //你的accessKeyId
-    public static final String accessKeyId = "LTAIsHMJVPf8sYn6";
+    public static final String accessKeyId = "";
 
     //你的accessKeySecret
-    public static final String accessKeySecret = "DUPTlw9fn6yMFcqUuT49xzaSDP5gqz";
+    public static final String accessKeySecret = "";
 
     public static void main(String[] args) {
         int random = new Random().nextInt(999999);
